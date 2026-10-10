@@ -2,6 +2,7 @@
 # Capa de controladores (rutas HTTP). Conecta Flask con el servicio.
 
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 from models.persona import ActualizarPersonaDTO, CrearPersonaDTO
 from repositories.persona_repository import PersonaRepositoryMemoria
@@ -14,6 +15,7 @@ from services.persona_service import (
 
 app = Flask(__name__)
 app.json.ensure_ascii = False  # que "María" no salga como "Mar\u00eda"
+CORS(app)
 
 # Una sola instancia para toda la app, así los datos se mantienen entre requests.
 repositorio = PersonaRepositoryMemoria()
